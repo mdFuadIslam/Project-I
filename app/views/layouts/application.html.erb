@@ -15,12 +15,13 @@
 
   <body>
     <%= render "partials/sidebar" %>
-    <%= render "partials/header" %>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-    <%= render "partials/footer" %>
-
+  
+    <div class="p-4 sm:ml-64">
+      <main class="container mx-auto mt-28 px-5 flex">
+        <%= yield %>
+      </main>
+      <%= render "partials/footer" %>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
   </body>
 </html>
