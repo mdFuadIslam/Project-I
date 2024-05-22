@@ -4,4 +4,4 @@
 //= link_tree ../../../vendor/javascript .js
 //= link_tree ../builds
 
-//= link node_modules/flowbite/dist/flowbite.min.js
+//= link ../node_modules/flowbite/dist/flowbite.min.js
