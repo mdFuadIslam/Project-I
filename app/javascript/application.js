@@ -5,4 +5,3 @@ import "controllers"
 import 'flowbite';
 import "flowbite/dist/flowbite.turbo.js";
 
-//= require node_modules/flowbite/dist/flowbite.min.js
