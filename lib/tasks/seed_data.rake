@@ -2,7 +2,7 @@ namespace :db do
   desc "Seed the database with production data"
   task seed_production: :environment do
     # Add your seed data here
-    User.create!(
+    user = User.create!(
       name: 'admin',
       email: 'admin@project-i.com',
       password: '123456',
@@ -12,5 +12,7 @@ namespace :db do
       nationality: 'unknown',
       city: 'unknown'
     )
+    user.skip_confirmation!
+    user.save!
   end
 end
