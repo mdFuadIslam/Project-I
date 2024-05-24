@@ -77,17 +77,12 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    autoprefixer-rails (10.4.16.0)
-      execjs (~> 2)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
-    bootstrap (5.3.3)
-      autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 2.11.8, < 3)
     builder (3.2.4)
     capybara (3.40.0)
       addressable
@@ -113,7 +108,6 @@ GEM
       warden (~> 1.2.3)
     drb (2.2.1)
     erubi (1.12.0)
-    execjs (2.9.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -163,7 +157,6 @@ GEM
       rack (>= 2.2.3)
       rack-protection
     orm_adapter (0.5.0)
-    popper_js (2.11.8)
     psych (5.1.2)
       stringio
     public_suffix (5.0.5)
@@ -277,7 +270,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bootstrap (~> 5.3)
   capybara
   debug
   devise (~> 4.9)

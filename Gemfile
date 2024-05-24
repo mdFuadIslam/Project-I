@@ -73,5 +73,3 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "devise", "~> 4.9"
 
 gem "omniauth", "~> 2.1"
-
-gem "bootstrap", "~> 5.3"
