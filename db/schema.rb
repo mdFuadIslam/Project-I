@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_052148) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_24_063305) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -31,6 +31,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_052148) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "status", default: "member"
+    t.string "theme", default: "dark"
+    t.string "language", default: "en"
+    t.string "nationality", default: ""
+    t.string "city", default: ""
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
