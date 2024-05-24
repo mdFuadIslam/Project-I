@@ -8,7 +8,7 @@ namespace :db do
       password: '123456',
       status: 'admin',
       theme: 'dark',
-      lang: 'en',
+      language: 'en',
       nationality: 'unknown',
       city: 'unknown'
     )
