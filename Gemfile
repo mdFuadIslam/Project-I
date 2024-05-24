@@ -69,3 +69,7 @@ end
 gem "tailwindcss", "~> 0.1.1"
 
 gem "tailwindcss-rails", "~> 2.6"
+
+gem "devise", "~> 4.9"
+
+gem "omniauth", "~> 2.1"

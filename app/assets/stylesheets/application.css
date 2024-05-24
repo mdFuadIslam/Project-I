@@ -18,10 +18,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color: rgb(225, 225, 225);
-}
-
 .bg-sidebar {
     background-color: rgb(17 24 39);
   }

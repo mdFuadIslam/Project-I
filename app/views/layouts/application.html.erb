@@ -13,10 +13,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class = 'bg-zinc-400 dark:bg-zinc-800'>
     <%= render "partials/sidebar" %>
   
     <div class="p-4 sm:ml-64">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <main class="container mx-auto px-5 flex">
         <%= yield %>
       </main>
