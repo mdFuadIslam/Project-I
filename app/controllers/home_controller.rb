@@ -14,4 +14,20 @@ class HomeController < ApplicationController
     set_locale
     redirect_to request.referer
   end
+
+  def items_listing
+
+  end
+
+  def collections_listing
+
+  end
+
+  def item_view
+
+  end
+
+  def collection_view
+
+  end
 end

@@ -20,32 +20,44 @@
          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
       </button>
-      <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+      <button type="button" class="flex text-sm bg-white dark:bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+        <% if user_signed_in?%>
+        <img class="w-8 h-8 rounded-full" src="<%= image_path('default_user.png') %>" alt="user photo">
+        <% else %>
+        <img class="w-8 h-8 rounded-full" src="<%= image_path('default_user.png') %>" alt="user photo">
+        <% end %>
       </button>
       </div>
       <!-- Dropdown menu -->
       <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+        <% if user_signed_in?%>
         <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+          <span class="block text-sm text-gray-900 dark:text-white"><%= current_user.name %></span>
+          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><%= current_user.email %></span>
         </div>
 
         <ul class="py-2" aria-labelledby="user-menu-button">
           <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><%= t('dashboard')%></a>
+            <%= link_to users_dashboard_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", method: :get do %><%= t('dashboard')%><% end %>
           </li>
           <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><%= t('settings') %></a>
+            <%= link_to users_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", method: :get do %><%= t('settings') %><% end %>
           </li>
           <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><%= t('sign_out') %></a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><%= t('sign_in') %></a>
+            <%= form_with url: destroy_user_session_path, method: :delete do %><button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><%= t('sign_out') %></button><% end %>
           </li>
         </ul>
+        <% else %>
+        <ul class="py-2" aria-labelledby="user-menu-button">
+          <li>
+            <%= link_to new_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", method: :get do %><%= t('sign_in') %><% end %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", method: :get do %><%= t('sign_up') %><% end %>
+          </li>
+        </ul>
+        <% end %>
       </div>
       <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
@@ -70,14 +82,20 @@
             </div>
         </form>
       </li>
-      <li class = 'w-1/4 sm:mt-6'>
-        <a href="#" class="block text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page"><%= t('home') %></a>
+      <li class = '<%= "w-1/4 sm:mt-6 #{current_page?(root_path) ? 'block text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' : 'block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }" %>'>
+        <%= link_to root_path, class: "", method: :get do %>
+        <%= t('home') %>
+        <% end %>
       </li>
-      <li class = 'w-1/4 sm:mt-6'>
-        <a href="#" class="block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"><%= t('items') %></a>
+      <li class = '<%= "w-1/4 sm:mt-6 #{current_page?(home_items_listing_path) ? 'block text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' : 'block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }" %>'>
+        <%= link_to home_items_listing_path, class: "", method: :get do %>
+        <%= t('items') %>
+        <% end %>
       </li>
-      <li class = 'w-1/4 sm:mt-6'>
-        <a href="#" class="block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"><%= t('collections') %></a>
+      <li class = '<%= "w-1/4 sm:mt-6 #{current_page?(home_collections_listing_path) ? 'block text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' : 'block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }" %>'>
+        <%= link_to home_collections_listing_path, class: "", method: :get do %>
+        <%= t('collections') %>
+        <% end %>
       </li>
     </ul>
   </div>
@@ -90,73 +108,91 @@
          <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
          <span class="self-center text-xl font-semibold whitespace-nowrap text-white dark:text-white">Project-I</span>
       </div>
+      <% if user_signed_in? %>
+      <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 dark:text-gray-400"><%= t('menu') %></h5>
       <ul class="space-y-2 font-medium">
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <%= link_to users_dashboard_path, class: "flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group", method: :get do %>
                <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                   <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
                </svg>
                <span class="ms-3"><%= t('dashboard') %></span>
-            </a>
+            <% end %>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <%= link_to users_items_management_path, class: "flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group", method: :get do %>
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                   <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
                </svg>
                <span class="flex-1 ms-3 whitespace-nowrap"><%= t('item_management') %></span>
-            </a>
+            <% end %>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <%= link_to users_collections_management_path, class: "flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group", method: :get do %>
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 128 128"><path d="M105.924 76.451c-3.678 0-7.137.926-10.176 2.556l-3.877-4.209a23.338 23.338 0 0 0 4.471-10.071 15.642 15.642 0 0 0 6.432 1.366c8.855 0 16.057-7.206 16.057-16.043 0-8.859-7.203-16.066-16.057-16.066a15.995 15.995 0 0 0-14.229 8.661c-4.141-3.592-9.493-5.752-15.375-5.752-3.15 0-6.145.617-8.877 1.741l-.837-1.146a17.924 17.924 0 0 0 3.943-11.239c0-9.917-8.062-17.983-17.996-17.983-9.912 0-17.974 8.066-17.974 17.983 0 9.939 8.062 18.005 17.974 18.005 2.489 0 4.868-.507 7.049-1.433l.462.617-.72.198c-4.339 4.253-7.592 10.248-7.592 16.837v.419l-4.302.727c-4.317-6.7-11.59-11.129-20.136-11.129C10.773 50.491 0 61.399 0 74.798s10.968 24.308 24.36 24.308 24.328-10.909 24.328-24.308c0-1.631-.127-3.239-.435-4.782l3.163-.485c3.546 8.529 11.967 14.523 21.747 14.523 4.449 0 8.616-1.234 12.162-3.394l3.658 4.011a21.463 21.463 0 0 0-4.691 13.421c0 11.944 9.714 21.641 21.63 21.641 11.938 0 21.63-9.697 21.63-21.641.002-11.922-9.69-21.641-21.628-21.641zm-3.15-33.651a7.255 7.255 0 0 1 7.247 7.251c0 3.989-3.26 7.228-7.247 7.228s-7.247-3.239-7.247-7.228a7.254 7.254 0 0 1 7.247-7.251zM24.426 90.291c-8.546 0-15.485-6.942-15.485-15.493s6.938-15.493 15.485-15.493S39.91 66.248 39.91 74.798s-6.938 15.493-15.484 15.493zm24.978-54.852c-5.066 0-9.163-4.121-9.163-9.19 0-5.047 4.097-9.168 9.163-9.168s9.185 4.121 9.185 9.168c0 5.069-4.119 9.19-9.185 9.20zm23.766 39.8c-8.128 0-14.736-6.611-14.736-14.765 0-8.132 6.608-14.765 14.736-14.765 8.15 0 14.758 6.633 14.758 14.765 0 8.154-6.608 14.765-14.758 14.765zm32.754 35.679c-7.07 0-12.819-5.752-12.819-12.826s5.749-12.826 12.819-12.826c7.071 0 12.819 5.752 12.819 12.826s-5.749 12.826-12.819 12.826z"/></svg>
                <span class="flex-1 ms-3 whitespace-nowrap"><%= t('collection_management') %></span>
-            </a>
+            <% end %>
          </li>
+         </ul>
+         <% if current_user.status == 'admin' %>
+         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+         <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 dark:text-gray-400"><%= t('admin_panel') %></h5>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <%= link_to users_admin_page_path, class: "flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group", method: :get do %>
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                   <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                </svg>
                <span class="flex-1 ms-3 whitespace-nowrap"><%= t('user_management') %></span>
-            </a>
+            <% end %>
          </li>
+         </ul>
+         <% end %>
+         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+         <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 dark:text-gray-400"><%= t('user_panel') %></h5>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <%= link_to users_settings_path, class: "flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group", method: :get do %>
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill='currentColor' viewBox="0 0 22 22">
                  <path d="M7 7a3.994 3.994 0 0 0-3.857 3H0v2h3.143a3.979 3.979 0 0 0 7.714 0H22v-2H10.857A3.994 3.994 0 0 0 7 7zM17 0a3.994 3.994 0 0 0-3.857 3H0v2h13.143a3.979 3.979 0 0 0 7.714 0H22V3h-1.143A3.994 3.994 0 0 0 17 0zM17 14a3.994 3.994 0 0 0-3.857 3H0v2h13.143a3.979 3.979 0 0 0 7.714 0H22v-2h-1.143A3.994 3.994 0 0 0 17 14z"/>
                </svg>
                <span class="flex-1 ms-3 whitespace-nowrap"><%= t('settings') %></span>
-            </a>
+            <% end %>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <%= form_with url: destroy_user_session_path, method: :delete do %>
+              <button type="submit" class="flex w-full items-center text-left p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" id="sign-out">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M10.95 15.84h-11V.17h11v3.88h-1V1.17h-9v13.67h9v-2.83h1v3.83z"/>
+                  <path d="M5 8h6v1H5zM11 5.96l4.4 2.54-4.4 2.54V5.96z"/>
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap"><%= t('sign_out') %></span>
+              </button>
+            <% end %>
+         </li>
+         </ul>
+         <% else %>
+         <ul class="space-y-2 font-medium">
+         <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 dark:text-gray-400"><%= t('menu') %></h5>
+         <li>
+            <%= link_to new_user_session_path, class: 'flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group', method: :get do %>
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                </svg>
                <span class="flex-1 ms-3 whitespace-nowrap"><%= t('sign_in') %></span>
+            <% end %>
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <%= link_to new_user_registration_path, class: 'flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group', method: :get do %>
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
                   <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"/>
                   <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"/>
                </svg>
                <span class="flex-1 ms-3 whitespace-nowrap"><%= t('sign_up') %></span>
-            </a>
+            <% end %>
          </li>
-         <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" id="sign-out">
-               <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M10.95 15.84h-11V.17h11v3.88h-1V1.17h-9v13.67h9v-2.83h1v3.83z"/>
-                  <path d="M5 8h6v1H5zM11 5.96l4.4 2.54-4.4 2.54V5.96z"/>
-               </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap"><%= t('sign_out') %></span>
-            </a>
-         </li>
+         <% end %>
       </ul>
    </div>
 </aside>
