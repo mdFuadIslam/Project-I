@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'users/settings'
   get 'users/admin_page', to: 'users#admin_page'
   post 'users/submited/choice', to: 'users#manage'
+  get 'users/admin_user_view', to: 'users#admin_user_view'
 
   get 'home/index'
   get 'home/collections/listing', to: 'home#collections_listing'

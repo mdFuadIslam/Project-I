@@ -1,5 +1,5 @@
 require_relative "boot"
-
+require File.expand_path('../../lib/middleware/admin_middleware', __FILE__)
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
@@ -29,5 +29,6 @@ module ProjectI
 
     config.i18n.fallbacks = true
 
+    #config.middleware.use AdminMiddleware
   end
 end

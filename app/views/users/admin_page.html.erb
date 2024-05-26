@@ -1,15 +1,19 @@
 <%= form_tag(users_submited_choice_path, method: :post) do %>
-<div>
-<div class="flex gap-4 justify-items-center">
-  <%= submit_tag 'Block', name: 'block', class: 'btn btn-danger mr-2' %>
+<div class = 'grid grid-cols-1 gap-4'>
+<div class="flex gap-4 justify-items-end">
+  <%= submit_tag 'Block', name: 'block', class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"%>
 
-  <%= button_tag type: 'submit', name: 'delete' do %>
+  <%= button_tag type: 'submit', name: 'delete', class: 'bg-red-600 hover:bg-red-700 border border-transparent text-white font-medium py-2 px-4 rounded-md', style: 'font-size:24px' do %>
     <i class="fa fa-trash-o" style="font-size:24px"></i>
   <% end %>
 
-  <%= button_tag type: 'submit', name: 'unblock', class: 'btn btn-success' do %>
+  <%= button_tag type: 'submit', name: 'unblock', class: "inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" do %>
     <i class="fa fa-unlock" style="font-size:24px"></i>
   <% end %>
+
+  <%= submit_tag 'Promote', name: 'add_to_admin', class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+
+  <%= submit_tag 'Demote', name: 'remove_from_admin', class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
 </div>
 
 <div class="relative shadow-md sm:rounded-lg">
@@ -56,7 +60,7 @@
                     <%= user.id %>
                 </td>
                 <td class="px-4 py-4">
-                    <%= user.name %>
+                    <%= link_to user.name, users_admin_user_view_path(user.id), class: 'hover:underline hover:text-blue-600'%>
                     <div class = "flex md:hidden">
                         <%= user.email %>
                     </div>

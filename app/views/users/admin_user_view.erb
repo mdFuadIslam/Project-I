@@ -1,0 +1,70 @@
+<div class = 'bg-white dark:bg-gray-800 grid grid-cols-1 gap-4 rounded-lg p-4'>
+<div class="flex flex-col gap-4 dark:text-white">
+  <div class="flex justify-between">
+    <span class="font-bold">
+      <%= @user.name %>
+    </span>
+    <span class="text-gray-500 dark:text-white">
+      <%= @user.email %>
+    </span>
+  </div>
+
+  <dl class="grid grid-cols-2 gap-4 dark:text-white">
+    <dt class="font-bold">
+      <%= t('user_signed_in_at') %>
+    </dt>
+    <dd>
+      <%= @user.current_sign_in_at %>
+    </dd>
+
+    <dt class="font-bold">
+      <%= t('created_at') %>
+    </dt>
+    <dd>
+      <%= @user.created_at %>
+    </dd>
+
+    <dt class="font-bold">
+      <%= t('status') %>
+    </dt>
+    <dd>
+      <%= @user.status %>
+    </dd>
+
+    <dt class="font-bold">
+      <%= t('nationality') %>
+    </dt>
+    <dd>
+      <%= @user.nationality %>
+    </dd>
+
+    <dt class="font-bold">
+      <%= t('city') %>
+    </dt>
+    <dd>
+      <%= @user.city %>
+    </dd>
+  </dl>
+</div>
+<%= form_tag(users_submited_choice_path, method: :post) do %>
+
+<%= hidden_field_tag :user_ids, [@user.id] %>
+
+
+<div class="flex gap-4 justify-items-end">
+  <%= submit_tag 'Block', name: 'block', class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"%>
+
+  <%= button_tag type: 'submit', name: 'delete', class: 'bg-red-600 hover:bg-red-700 border border-transparent text-white font-medium py-2 px-4 rounded-md', style: 'font-size:24px' do %>
+    <i class="fa fa-trash-o" style="font-size:24px"></i>
+  <% end %>
+
+  <%= button_tag type: 'submit', name: 'unblock', class: "inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" do %>
+    <i class="fa fa-unlock" style="font-size:24px"></i>
+  <% end %>
+
+  <%= submit_tag 'Promote', name: 'add_to_admin', class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+
+  <%= submit_tag 'Demote', name: 'remove_from_admin', class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+</div>
+<% end %>
+</div>
