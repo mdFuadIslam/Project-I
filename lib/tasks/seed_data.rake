@@ -14,5 +14,20 @@ namespace :db do
     )
     user.skip_confirmation!
     user.save!
+
+    20.times do
+      user = User.create!(
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
+        password: '123456',
+        status: 'member',
+        theme: 'dark',
+        language: 'en',
+        nationality: Faker::Address.country,
+        city: Faker::Address.city,
+        confirmed_at: Time.current
+      )
+      user.skip_confirmation!
+      user.save!
   end
 end
