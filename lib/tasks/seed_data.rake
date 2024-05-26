@@ -24,8 +24,7 @@ namespace :db do
         theme: 'dark',
         language: 'en',
         nationality: Faker::Address.country,
-        city: Faker::Address.city,
-        confirmed_at: Time.current
+        city: Faker::Address.city
       )
       user.skip_confirmation!
       user.save!
