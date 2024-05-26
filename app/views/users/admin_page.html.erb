@@ -1,1 +1,102 @@
-admin_page
+<%= form_tag(users_submited_choice_path, method: :post) do %>
+<div>
+<div class="flex gap-4 justify-items-center">
+  <%= submit_tag 'Block', name: 'block', class: 'btn btn-danger mr-2' %>
+
+  <%= button_tag type: 'submit', name: 'delete' do %>
+    <i class="fa fa-trash-o" style="font-size:24px"></i>
+  <% end %>
+
+  <%= button_tag type: 'submit', name: 'unblock', class: 'btn btn-success' do %>
+    <i class="fa fa-unlock" style="font-size:24px"></i>
+  <% end %>
+</div>
+
+<div class="relative shadow-md sm:rounded-lg">
+    <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+            <div class = >
+                <th class="px-4 py-3">
+                    <%= check_box_tag 'select_all', nil, false, id: 'selectAll' %>
+                </th>
+                <th class="hidden md:block md:table-cell px-4 py-3">
+                    ID
+                </th>
+                <th class="px-4 py-3">
+                    Name
+                </th>
+                <th class="px-4 py-4">
+                <span class="hidden md:block">
+                    Email
+                </span>
+                </th>
+                <th class="px-4 py-4">
+                <span class="hidden lg:block">
+                    Last login
+                </span>
+                </th>
+                <th class="px-4 py-4">
+                <span class="hidden lg:block">
+                    Joined At
+                </span>
+                </th>
+                <th class="px-4 py-3">
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th class="px-4 py-4">
+                    <%= check_box_tag 'user_ids[]', user.id, false, class: 'input[type=checkbox]' %>
+                </th>
+                <td class="hidden md:table-cell md:block px-4 py-4">
+                    <%= user.id %>
+                </td>
+                <td class="px-4 py-4">
+                    <%= user.name %>
+                    <div class = "flex md:hidden">
+                        <%= user.email %>
+                    </div>
+                </td>
+                <td class="px-4 py-4">
+                <span class="hidden md:block">
+                    <%= user.email %>
+                </span>
+                </td>
+                <td class="px-4 py-4">
+                <span class="hidden lg:block">
+                    <%= user.current_sign_in_at %>
+                </span>
+                </td>
+                <td class="px-4 py-4">
+                <span class="hidden lg:block">
+                    <%= user.created_at %>
+                </span>
+                </td>
+                <td class="px-4 py-4">
+                    <%= user.status %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
+</div>
+<% end %>
+
+<script>
+$("#selectAll").click(function() {
+  $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
+});
+
+$("input[type=checkbox]").click(function() {
+  if (!$(this).prop("checked")) {
+    $("#selectAll").prop("checked", false);
+  }
+});
+
+jackHarnerSig();
+</script>

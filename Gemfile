@@ -73,3 +73,5 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "devise", "~> 4.9"
 
 gem "omniauth", "~> 2.1"
+
+gem "faker", "~> 3.3"
