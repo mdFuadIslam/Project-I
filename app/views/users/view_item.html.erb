@@ -1,0 +1,49 @@
+<div class = 'bg-white dark:bg-gray-800 p-4 mt-8 rounded-lg w-full'>
+    <%= form_tag users_edit_item_path, method: :post, html: { class: 'max-w-md mx-auto mt-4' } do%>
+      <%= hidden_field_tag :id, @item.id %>
+      <div class="relative z-0 w-full mb-5 group">
+        <%= text_field_tag :name, @item.name, class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: ' ', required: true %>
+        <label for="floating_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+      </div>
+      
+      <div class="relative z-0 w-full mb-5 group">
+        <%= text_field_tag :tags, @item.tags, class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: ' ', required: true %>
+        <label for="floating_tags" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Tags</label>
+      </div>
+
+      <div id="fields-container">
+        <% # get the current fields, if any %>
+        <% if @fields %>
+        <% @fields.each_with_index do |field,index| %>
+            <div class="flex mt-2 mb-2">
+              <input type="hidden" name="field_id[]" value="<%= field.id %>"/>
+              <label for="field_name_<%= field.id %>" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-2"><%= field.field_name %>:</label>
+              <% if field.field_type == "integer"%>
+                <input type="number" name="field_value[]" id="field_value_<%= field.id %>" value ="<%= @fields_value[index].value %>"/>
+              <% elsif field.field_type == "string" %>
+                <input type="text" name="field_value[]" id="field_value_<%= field.id %>" value ="<%= @fields_value[index].value %>"/>
+              <% elsif field.field_type == "boolean_checkboxes" %>
+                  <label for="field_value_<%= field.id %>_true">
+                    <input type="radio" name="field_value[]" id="field_value_<%= field.id %>_true" value="true" <%= @fields_value[index].value == 'true' ? 'checked' : '' %>/>
+                    True
+                  </label>
+                  <label for="field_value_<%= field.id %>_false">
+                    <input type="radio" name="field_value[]" id="field_value_<%= field.id %>_false" value="false" <%= @fields_value[index].value == 'false' ? 'checked' : '' %>/>
+                    False
+                  </label>
+              <% elsif field.field_type == "multiline_text" %>
+                <%= text_area_tag "field_value[]", @fields_value[index].value, { placeholder: ' ', required: true, data: { markdown: true } } %>
+              <% elsif field.field_type == "date" %>
+                <input type="date" id="field_value_<%= field.id %>" name="field_value[]" value ="<%= @fields_value[index].value %>"> 
+              <% end %>
+              
+            </div>
+        <% end %>
+        <% end %>
+      </div>
+
+      <%= submit_tag "Update", name: 'update', class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      <%= submit_tag "Delete", name: 'delete', class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    <% end %>
+  
+</div>

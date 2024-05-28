@@ -1,0 +1,116 @@
+<div class = 'bg-white dark:bg-gray-800 p-4 mt-8 rounded-lg w-full h-full'>
+<h1 class = "text-2xl"><strong>Collection Creation</strong></h1>
+
+<%= form_tag users_edit_collection_path, method: :post, html: { class: 'max-w-md mx-auto mt-4' } do%>
+  <%= hidden_field_tag :id, @collection.id %>
+  <div class="grid md:grid-cols-2 md:gap-6">
+    <div class="relative z-0 w-full mb-5 group">
+      <%= text_field_tag :name, @collection.name, class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: ' ', required: true %>
+      <label for="floating_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+    </div>
+    <div class="relative z-0 w-full mb-5 group">
+        <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories:</label>
+        <select id="category" name = 'category' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="<%= @collection.category %>"><%= @collection.category %></option>
+          <option value="Books">Books</option>
+          <option value="Signs">Signs</option>
+          <option value="Silverware">Silverware</option>
+          <option value="Art and Antiques">Art and Antiques</option>
+          <option value="Stamps and Coins">Stamps and Coins</option>
+          <option value="Toys and Games">Toys and Games</option>
+          <option value="Music and Movies">Music and Movies</option>
+          <option value="Sports Memorabilia">Sports Memorabilia</option>
+          <option value="Vehicles">Vehicles</option>
+          <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="relative z-0 w-full mb-5">
+      <%= text_area_tag :description, @collection.description, class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: ' ', required: true, data: { markdown: true } %>
+      <label for="description" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
+    </div>
+  </div>
+
+
+  <div id="fields-container">
+    <% if @fields %>
+      <% @fields.each do |field| %>
+        <div class="field-container">
+          <label for="field_name_<%= field.id %> ">Field name:</label>
+          <input type="text" name="field_name[]" id="field_name_<%= field.id %>" value="<%= field.field_name %>"/>
+          <label for="field_type_<%= field.id %>">Field type:</label>
+          <select name="field_type[]" id="field_type_<%= field.id %>" onchange="document.getElementById('field_type_<%= field.id %>').value=this.value;">
+            <option value="<%= field.field_type %>"><%= field.field_type %></option>
+            <option value="integer">Integer</option>
+            <option value="string">String</option>
+            <option value="multiline_text">Multiline text</option>
+            <option value="boolean_checkboxes">Boolean checkboxes</option>
+            <option value="date">Date</option>
+          </select>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class = 'gap-4 mt-4'>
+  <button type="button" class = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' id="add-button">Add field</button>
+
+  <%= submit_tag "Change", name: 'change', class: "text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+  
+  <%= submit_tag "Delete", name: 'delete', class: "text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+  </div>
+
+<% end %>
+</div>
+
+
+
+
+<script>
+    let addButton = document.getElementById("add-button");
+    addButton.addEventListener("click", function(){
+      let container = document.getElementById("fields-container");
+      let clone = document.createElement("div");
+      clone.classList.add("field-container");
+
+      let nameInput = document.createElement("input");
+      nameInput.type = "text";
+      nameInput.name = "field_name[]";
+      nameInput.id = `field_name_${container.childElementCount}`
+      nameInput.style.marginRight = "1em";
+      nameInput.style.marginTop = "1em";
+
+      let typeSelect = document.createElement("select");
+      typeSelect.name = "field_type[]";
+      typeSelect.id = `field_type_${container.childElementCount}`;
+      typeSelect.onchange = function(){
+        typeSelect.value = this.value;
+      };
+
+      let options = [
+        { value: "integer", text: "Integer" },
+        { value: "string", text: "String" },
+        { value: "multiline_text", text: "Multiline text" },
+        { value: "boolean_checkboxes", text: "Boolean checkboxes" },
+        { value: "date", text: "Date" },
+     ];
+
+      options.forEach(option => {
+        let optionElement = document.createElement("option");
+        optionElement.value = option.value;
+        optionElement.innerText = option.text;
+        if (option.value === document.querySelector(`#field_type_${container.childElementCount - 1}`)?.value) {
+          optionElement.selected = true;
+        }
+
+        typeSelect.appendChild(optionElement);
+      });
+
+      clone.appendChild(document.createElement("label")).innerText = "Field name: ";
+      clone.appendChild(nameInput);
+
+      clone.appendChild(document.createElement("label")).innerText = "Field type: ";
+      clone.appendChild(typeSelect);
+
+      container.appendChild(clone);
+    });
+  </script>
