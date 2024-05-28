@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/collections/listing', to: 'home#collections_listing'
   get 'home/items/listing', to: 'home#items_listing'
-  get 'home/item/view', to: 'home#item_view'
-  get 'home/collection/view', to: 'home#collection_view'
+  get 'home/view_item', to: 'home#view_item'
+  get 'home/view_collection', to: 'home#view_collection'
   get 'change_language', to: 'home#change_language'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

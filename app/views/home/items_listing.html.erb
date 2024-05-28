@@ -1,1 +1,12 @@
-items_list
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+   <% @Items.each_with_index do |item,index| %>
+    <div class = 'bg-white dark:bg-gray-800 p-4 text-center dark:text-white'>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
+        <br>
+        <%=link_to item.name, home_view_item_path(item.id), class: "text-black hover:text-blue-600 dark:hover:text-blue-600 font-bold py-2 px-4 rounded dark:text-white" %>
+        <br>
+        <%= @Owners[index] %>
+    </div>
+    <% end %>
+</div>

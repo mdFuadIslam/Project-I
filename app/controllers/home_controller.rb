@@ -16,18 +16,26 @@ class HomeController < ApplicationController
   end
 
   def items_listing
-
+    @Items = Item.all
+    @Owners = []
+    @Items.each do |item|
+      @Owners << User.find_by(id: item.owner_id).name
+    end
   end
 
   def collections_listing
+    @Collections = Collection.all
+    @Owners = []
+    @Collections.each do |collection|
+      @Owners << User.find_by(id: collection.owner_id).name
+    end
+  end
+
+  def view_item
 
   end
 
-  def item_view
-
-  end
-
-  def collection_view
+  def view_collection
 
   end
 end
