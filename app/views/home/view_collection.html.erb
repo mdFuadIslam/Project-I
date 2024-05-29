@@ -31,6 +31,13 @@
     </label>
     <p class = 'overflow-y-auto' id="owner-name"><%= @owner_name %></p>
   </div>
+
+  <div>
+    <label for="description" class="block text-lg font-medium text-gray-700 dark:text-white">
+      description:
+    </label>
+    <p class = 'overflow-y-auto' id="description"><%= @collection.description %></p>
+  </div>
   
   <% unless @fields.nil? %>
     <% @fields.each_with_index do |field,index| %>
