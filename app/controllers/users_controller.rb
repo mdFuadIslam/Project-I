@@ -41,6 +41,9 @@ class UsersController < ApplicationController
   def collections_management
     @total = 0
     @collections = Collection.where(owner_id: current_user.id)
+    if current_user.status == "admin"
+      @collections = Collection.all
+    end
     if @collections.nil?
       @collections = []
     else
@@ -96,6 +99,9 @@ class UsersController < ApplicationController
 
   def items_management
     @items = Item.where(owner_id: current_user.id)
+    if current_user.status == "admin"
+      @items = Item.all
+    end
     @collection_name = []
     @total = 0
     @items.each do |item|
@@ -174,9 +180,10 @@ class UsersController < ApplicationController
     end
   end
 
+
   private
   def valid_admin
-    if user_signed_in? && current_user.status == "admin" && current_user.status != "blocked"
+    if user_signed_in? && current_user.status == "admin"
       return true
     elsif user_signed_in? && current_user.status != "blocked"
       redirect_to users_dashboard_path

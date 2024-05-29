@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: "sessions"}
+
   root to: 'home#index'
 
   get 'users/dashboard'
@@ -22,9 +23,12 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/collections/listing', to: 'home#collections_listing'
   get 'home/items/listing', to: 'home#items_listing'
-  get 'home/view_item', to: 'home#view_item'
+  get 'home/view/item', to: 'home#view_item'
   get 'home/view_collection', to: 'home#view_collection'
   get 'change_language', to: 'home#change_language'
+
+  post 'home/vote', to: 'home#vote'
+  post 'home/comment', to: 'home#comment'
 
   post 'home/search_results', to: 'home#search_results'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
