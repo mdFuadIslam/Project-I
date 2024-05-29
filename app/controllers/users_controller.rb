@@ -116,6 +116,17 @@ class UsersController < ApplicationController
       @collection_id = params[:collection_id]
       @fields = CustomField.where(collection_id: params[:collection_id])
     elsif @step == '3'
+      tag_names = params[:tags]
+      tag_names.split(',').each do |name|
+        if Tag.find_by(name: name.strip).nil?
+          tag = Tag.create(name: name.strip)
+        else
+          tag = Tag.find_by(name: name.strip)
+          count = tag.count + 1
+          tag.update(count: count)
+        end
+        tag.save
+      end
       @item = Item.create(name: params[:name], tags: params[:tags], collection_id: params[:collection_id], owner_id: current_user.id)
       @item.save
       unless params[:field_value].nil?
@@ -141,6 +152,7 @@ class UsersController < ApplicationController
     if @item.owner_id.to_s == current_user.id.to_s || current_user.status == "admin"
       @fields_value = CustomFieldValue.where(item_id: @item.id)
       if params[:update]
+        tag_item_count(@item.tags, params[:tags])
         @item.update(name: params[:name], tags: params[:tags], updated_at: Time.now)
         @fields_value.each do |field|
           field.destroy
@@ -178,6 +190,21 @@ class UsersController < ApplicationController
       return true
     else
       redirect_to root_path
+    end
+  end
+
+  def tag_item_count(oldTags,newTags)
+    oldTagArray = oldTags.split(',')
+    newTagArray = newTags.split(',')
+    oldTagArray.each do |oldTag|
+      if !newTagArray.include?(oldTag.strip)
+        oldTagCount = Tag.find_by(name: oldTag.strip).count
+        oldTagCount -= 1
+        Tag.find_by(name: oldTag).update(count: oldTagCount)
+      end
+    end
+    newTagArray.each do |name|
+      tag = Tag.find_or_create_by(name: name.strip)
     end
   end
 end

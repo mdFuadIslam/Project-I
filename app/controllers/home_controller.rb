@@ -7,6 +7,8 @@ class HomeController < ApplicationController
   def index
     session[:lang] ||= 'en'
     set_locale
+    @tags = Tag.order(created_at: :desc).limit(5)
+
   end
 
   def change_language
