@@ -1,19 +1,120 @@
+<div class = 'z-10 grid grid-cols-1 bg-white w-full dark:bg-gray-800 p-4 border border-black dark:border-gray-700 dark:text-white rounded-lg border border-black'>
 
+<div class="ml-0 mx-auto">
+  <img class=" mx-auto w-1/2 h-1/2 max-w-xs max-h-xs rounded-lg" src="<%= @collection.image_url.nil? ? image_path('collection') : collection.image_url %>" alt="">
+</div>
+<div class=" z-20 grid grid-cols-2 gap-4 ">
+  <div>
+    <label for="collection-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+      Name:
+    </label>
+    <p class = 'overflow-y-auto' id="collection-name"><%= @collection.name %></p>
+  </div>
 
-collection.id
+  <div>
+    <label for="collection-id" class="block text-lg font-medium text-gray-700 dark:text-white">
+      ID:
+    </label>
+    <p class = 'overflow-y-auto' id="collection-id"><%= @collection.id %></p>
+  </div>
 
-collection.name
+  <div>
+    <label for="collection-category" class="block text-lg font-medium text-gray-700 dark:text-white">
+      Category:
+    </label>
+    <p class = 'overflow-y-auto'><%= @collection.category %></p>
+  </div>
 
-collection.description
+  <div>
+    <label for="owner-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+      Owner:
+    </label>
+    <p class = 'overflow-y-auto' id="owner-name"><%= @owner_name %></p>
+  </div>
+  
+  <% unless @fields.nil? %>
+    <% @fields.each_with_index do |field,index| %>
+    <div>
+        <label for="field-values" class="block text-lg font-medium text-gray-700 dark:text-white">
+        <%= field.field_name %>:
+        </label>
+        <p class = 'overflow-y-auto' id="field-type"><%= field.field_type %></p>
+    </div>
+    <% end %>
+  <% end %>
+  
+  <div>
+    <label for="owner-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+      No. of Items:
+    </label>
+    <p class = 'overflow-y-auto' id="owner-name"><%= @items_count %></p>
+  </div>
 
-owner_name
+  <% unless @items.nil? %>
+    <div>
+        <label for="name" class="block text-lg font-medium text-gray-700 dark:text-white">
+        Name: 
+        </label>
+        <% @items.each_with_index do |item,index| %>
+          <p class = 'overflow-y-auto' id="item-name"><%= item.name %></p>
+        <% end %>
+    </div>
+  <% end %>
 
-no. of items in collection
+</div>
 
-items list
+<div class="flex justify-around gap-4 mt-7" >
+  <%= form_tag home_vote_path, method: :post, html: { class: 'hover:bg-blue-700 w-1/2' } do%>
+    <%= hidden_field_tag :type, 'collection' %>
+    <%= hidden_field_tag :type_id, @collection.id %>
+    <%= hidden_field_tag :action_name, 'like' %>
 
-like,dislike
+    <% if @liked == 1 %>
+      <%= submit_tag "Like", class: "text-blue-700 border border-blue-700 bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex collections-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+    <% else %>
+      <%= submit_tag "Like", class: "text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex collections-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+    <% end %>
+    <span id="like-counter" class="ml-2 text-sm"><%= @likes %></span>
+  <% end %>
+  <%= form_tag home_vote_path, method: :post, html: { class: 'hover:bg-blue-700 w-1/2' } do%>
+    <%= hidden_field_tag :type, 'collection' %>
+    <%= hidden_field_tag :type_id, @collection.id %>
+    <%= hidden_field_tag :action_name, 'dislike' %>
 
-comment button 
+    <% if @liked == 2 %>
+      <%= submit_tag "Dislike", class: "text-blue-700 border border-blue-700 bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex collections-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+    <% else %>
+      <%= submit_tag "Dislike", class: "text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex collections-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+    <% end %>
+    <span id="like-counter" class="ml-2 text-sm"><%= @dislikes %></span>
+  <% end %>
+</div>
 
-preview all comments 
+<div class = 'mt-7'>
+<%= form_tag home_comment_path, method: :post do%>
+    <%= hidden_field_tag :type_name, 'collection' %>
+    <%= hidden_field_tag :type_id, @collection.id %>
+    
+   <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+       <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+           <label for="comment" class="sr-only">Your comment</label>
+           <textarea id="comment" name ="comment" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required ></textarea>
+       </div>
+       <div class="flex collections-center justify-between px-3 py-2 border-t dark:border-gray-600">
+           <button type="submit" class="inline-flex collections-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+               Post comment
+           </button>
+       </div>
+   </div>
+<% end %>
+</div>
+<% unless @comments.nil? %>
+    <% @comments.each do |comment| %>
+    <div class = 'bg-white dark:bg-gray-800 p-4 mt-7 border border-black dark:border-gray-700 dark:text-white'>
+        <p>User: <%= comment.user_name %></p>
+        <p class = 'overflow-y-auto mt-2'><%= comment.content %></p>
+    </div>
+    <% end %>
+<% end %>
+</div>
+

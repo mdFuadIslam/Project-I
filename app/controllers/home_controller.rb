@@ -66,20 +66,50 @@ class HomeController < ApplicationController
       @dislikes = 0
     end
 
-    @vote = Vote.find_by(type_name: 'item', type_id: @item.id, user_id: current_user.id)
-    if @vote.nil?
-      @liked = 0
-    elsif @vote.action == 'like'
-      @liked = 1
+    if user_signed_in?
+      @vote = Vote.find_by(type_name: 'item', type_id: @item.id, user_id: current_user.id)
+      if @vote.nil?
+        @liked = 0
+      elsif @vote.action == 'like'
+        @liked = 1
+      else
+        @liked = 2
+      end
     else
-      @liked = 2
+      @liked = 0
     end
 
     @comments = Comment.where(type_name: 'item', type_id: @item.id)
   end
 
   def view_collection
+    @collection = Collection.find_by(id: params[:format])
+    @items = Item.where(collection_id: @collection.id)
+    @items_count = @items.count
+    @fields = CustomField.where(collection_id: @collection.id)
+    @owner_name = User.find_by(id: @collection.owner_id).name
+    @likes = Vote.where(type_name: 'collection', type_id: @collection.id, action: 'like').count
+    if @likes.nil?
+      @likes = 0
+    end
 
+    @dislikes = Vote.where(type_name: 'collection', type_id: @collection.id, action: 'dislike').count
+    if @dislikes.nil?
+      @dislikes = 0
+    end
+
+    if user_signed_in?
+      @vote = Vote.find_by(type_name: 'collection', type_id: @collection.id, user_id: current_user.id)
+      if @vote.nil?
+        @liked = 0
+      elsif @vote.action == 'like'
+        @liked = 1
+      else
+        @liked = 2
+      end
+    end
+
+    @comments = Comment.where(type_name: 'collection', type_id: @collection.id)
   end
 
   def search_results
@@ -95,18 +125,40 @@ class HomeController < ApplicationController
   end
 
   def vote
-    @vote = Vote.find_by(type_name: params[:type], type_id: params[:type_id], user_id: current_user.id)
-    if @vote.nil?
-      @vote = Vote.create(type_name: params[:type], type_id: params[:type_id], action: params[:action_name], user_id: current_user.id)
-    elsif @vote.action == params[:action_name]
-      @vote.destroy
+    if valid_user
+      @vote = Vote.find_by(type_name: params[:type], type_id: params[:type_id], user_id: current_user.id)
+      if @vote.nil?
+        @vote = Vote.create(type_name: params[:type], type_id: params[:type_id], action: params[:action_name], user_id: current_user.id)
+      elsif @vote.action == params[:action_name]
+        @vote.destroy
+      else
+        @vote.update(action: params[:action_name])
+      end
+      redirect_to request.referer
     else
-      @vote.update(action: params[:action_name])
+      redirect_to new_user_session_path
     end
-    redirect_to request.referer
   end
 
   def comment
+    if valid_user
+      @comment = Comment.create(content: params[:comment], type_name: params[:type_name], type_id: params[:type_id], user_id: current_user.id, user_name: current_user.name)
+      @comment.save
 
+      redirect_to request.referer
+    else
+      redirect_to new_user_session_path
+    end
+
+  end
+
+  private
+
+  def valid_user
+    if user_signed_in? && current_user.status != "blocked"
+      return true
+    else
+      return false
+    end
   end
 end
