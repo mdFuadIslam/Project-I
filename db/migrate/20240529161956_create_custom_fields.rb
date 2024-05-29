@@ -4,6 +4,8 @@ class CreateCustomFields < ActiveRecord::Migration[7.1]
       t.string :field_name
       t.string :field_type
       t.string :collection_id
+      t.datetime :created_at, null: false
+      t.datetime :updated_at, null: false
 
       t.timestamps
     end

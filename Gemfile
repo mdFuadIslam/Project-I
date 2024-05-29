@@ -77,5 +77,3 @@ gem "omniauth", "~> 2.1"
 gem "faker", "~> 3.3"
 
 gem 'actionpack'
-
-gem "aws-sdk", "~> 3.2"
