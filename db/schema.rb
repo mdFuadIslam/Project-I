@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_072255) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_080025) do
   create_table "collections", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_072255) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "items_count", default: 0
+    t.text "image_url"
   end
 
   create_table "custom_field_values", force: :cascade do |t|
@@ -44,6 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_072255) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "tags", default: "all"
+    t.text "image_url"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -79,6 +81,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_072255) do
     t.string "language", default: "en"
     t.string "nationality", default: ""
     t.string "city", default: ""
+    t.text "image_url"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

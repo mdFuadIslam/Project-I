@@ -2,7 +2,9 @@
 
    <% @Collections.each_with_index do |collection,index| %>
     <div class = 'bg-white dark:bg-gray-800 p-4 text-center dark:text-white'>
-        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
+        <div class="mx-auto w-full flex justify-center">
+            <img class="mx-auto w-1/2 h-1/2 max-w-xs max-h-xs rounded-lg" src="<%= collection.image_url.nil? ? image_path('collection') : collection.image_url %>" alt="">
+        </div>
         <br>
         <%=link_to collection.name, home_view_collection_path(collection.id), class: "text-black hover:text-blue-600 dark:hover:text-blue-600 font-bold py-2 px-4 rounded dark:text-white" %>
         <br>
@@ -10,3 +12,4 @@
     </div>
     <% end %>
 </div>
+

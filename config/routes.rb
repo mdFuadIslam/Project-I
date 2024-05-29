@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'home/view_item', to: 'home#view_item'
   get 'home/view_collection', to: 'home#view_collection'
   get 'change_language', to: 'home#change_language'
+
+  post 'home/search_results', to: 'home#search_results'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
