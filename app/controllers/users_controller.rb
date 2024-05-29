@@ -124,8 +124,6 @@ class UsersController < ApplicationController
     elsif @step == '3'
       tag_names = params[:tags]
       tag_names.split(',').each do |name|
-        puts 'was in tag_names.split(,)========================================================'
-        puts name
         if Tag.find_by(name: name.strip).nil?
           tag = Tag.create(name: name.strip)
         else
