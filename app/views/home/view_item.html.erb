@@ -1,7 +1,7 @@
 <div class = 'z-10 grid grid-cols-1 bg-white w-full dark:bg-gray-800 p-4 border border-black dark:border-gray-700 dark:text-white rounded-lg border border-black'>
 
 <div class="ml-0 mx-auto">
-  <img class=" mx-auto w-1/2 h-1/2 max-w-xs max-h-xs rounded-lg" src="<%= @item.image_url.nil? ? image_path('item') : item.image_url %>" alt="">
+  <img class=" mx-auto w-20 h-20 max-w-xs max-h-xs rounded-lg" src="<%= @item.image_url.nil? ? image_path('item') : item.image_url %>" alt="">
 </div>
 <div class=" z-20 grid grid-cols-2 gap-4 ">
   <div>
@@ -51,7 +51,7 @@
   <% end %>
 </div>
 
-<div class="flex justify-around gap-4 mt-7" >
+<div class="flex justify-start gap-4 mt-7" >
   <%= form_tag home_vote_path, method: :post, html: { class: 'hover:bg-blue-700 w-1/2' } do%>
     <%= hidden_field_tag :type, 'item' %>
     <%= hidden_field_tag :type_id, @item.id %>
