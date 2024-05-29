@@ -36,7 +36,7 @@
     <label for="description" class="block text-lg font-medium text-gray-700 dark:text-white">
       description:
     </label>
-    <p class = 'overflow-y-auto' id="description"><%= @collection.description %></p>
+    <p class = 'overflow-y-auto' id="description"><%= markdown(@collection.description) %></p>
   </div>
   
   <% unless @fields.nil? %>
