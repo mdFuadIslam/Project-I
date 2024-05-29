@@ -7,6 +7,8 @@ class HomeController < ApplicationController
   def index
     session[:lang] ||= 'en'
     set_locale
+
+    puts 'was in index========================================================'
     @tags = Tag.order(count: :desc).limit(5)
     @items = Item.order(created_at: :desc).limit(5)
     @collections = Collection.order(items_count: :desc).limit(5)
