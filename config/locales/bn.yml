@@ -83,3 +83,8 @@ bn:
   like: 'লাইক'
   dislike: 'ডিস্লাইক'
   owner: 'মালিক'
+  language: 'ভাষা'
+  theme: 'থিম'
+  new_password: 'নতুন পাসওয়ার্ড'
+  current_password: 'বর্তমান পাসওয়ার্ড'
+  back: 'ফিরে যান'

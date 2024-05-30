@@ -1,1 +1,80 @@
-dashboard
+<div class = 'grid grid-cols-1 w-full h-full'>
+<h1 class="text-3xl font-bold underline dark:text-white">Dashboard</h1>
+<br>
+<div class = "grid grid-cols-1 md:grid-cols-3 gap-4 w-full bg-white dark:bg-gray-800 p-4 mt-7 dark:text-white items-center">
+    <div class = 'col-span-2 row-span-3 border border-black dark:border-gray-700'>
+
+        
+            <!--<img src="<%= current_user.nil? ?  current_user : image_path('default_user.png') %>" class="w-12 h-12 rounded-full border border-gray-300 shadow-sm" alt="user image">-->
+            <img src="<%= image_path('default_user.png') %>" class="w-12 h-12 rounded-full border border-gray-300 shadow-sm mb-7" alt="user image">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">    
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('name') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.name %></p>
+            </div>
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('id') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.id %></p>
+            </div>
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('email') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.email %></p>
+            </div>
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('status') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.status %></p>
+            </div>
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('created_at') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.created_at %></p>
+            </div>
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('updated_at') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.updated_at %></p>
+            </div>
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('language') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.language %></p>
+            </div>
+
+            <div>
+                <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
+                    <%= t('theme') %> :
+                </label>
+                    <p class = 'overflow-y-auto' id="item-name"><%= current_user.theme %></p>
+            </div>
+            
+        </div>
+
+    </div>
+    <div class = 'col-span-1 row-span-2'>
+        <div style="box-sizing: border-box; width: 100%; height: 15vh; margin: 1em auto; border: 1px solid black; border-radius: 5px; padding: 1em;" class = 'border border-black dark:border-gray-700'>
+            <p class = ''><%= t("items_count")%> : <%= @items_count %></p>
+        </div>
+        <div style="box-sizing: border-box; width: 100%; height: 15vh; margin: 1em auto; border: 1px solid black; border-radius: 5px; padding: 1em;" class = 'border border-black dark:border-gray-700 mt-7'>
+            <p class = ''><%= t("collections_count")%> : <%= @collections_count %></p>
+        </div>
+    </div>
+</div>
+</div>

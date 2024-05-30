@@ -83,3 +83,8 @@ en:
   like: 'Like'
   dislike: 'Dislike'
   owner: 'Owner'
+  language: 'Language'
+  theme: 'Theme'
+  new_password: 'New Password'
+  current_password: 'Current Password'
+  back: 'Back'

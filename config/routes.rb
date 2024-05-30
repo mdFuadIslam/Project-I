@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get 'users/collections_management'
   get 'users/collection_creation_form'
   get 'users/view_collection'
-  get 'users/settings'
   get 'users/admin_page', to: 'users#admin_page'
   post 'users/submited/choice', to: 'users#manage'
   get 'users/admin_user_view', to: 'users#admin_user_view'

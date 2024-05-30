@@ -7,8 +7,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def settings
+  def dashboard
+    @items_count = Item.where(owner_id: current_user.id).count
+    @collections_count = Collection.where(owner_id: current_user.id).count
   end
+
 
   def manage
     selected_user_ids = params[:user_ids]
