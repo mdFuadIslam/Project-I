@@ -7,7 +7,7 @@
 </div>
 
 <div class = 'bg-white dark:bg-gray-800 p-4 mt-7 rounded'>
-<h1><strong>Items</strong></h1>
+<p class = "text-2xl text-gray-900 dark:text-white"><strong><%= t('items') %></strong></p>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <% @items.each_with_index do |item,index| %>
         <div class = 'bg-white dark:bg-gray-800 p-4 text-center dark:text-white'>
@@ -24,7 +24,7 @@
 </div>
 
 <div class = 'bg-white dark:bg-gray-800 p-4 mt-7 rounded'>
-<h1><strong>Collections</strong></h1>
+<p class = "text-2xl text-gray-900 dark:text-white"><strong><%= t('collections') %></strong></p>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <% @collections.each_with_index do |collection,index| %>
         <div class = 'bg-white dark:bg-gray-800 p-4 text-center dark:text-white'>

@@ -1,44 +1,44 @@
 <div class = ' bg-white dark:bg-gray-800 p-4 mt-7 rounded w-full'>
 
-<div class = 'flex justify-between'>
+<div class = 'flex justify-between dark:text-white'>
 
-No. of collections: <%= @total %>
+<%= t('collection_count') %> : <%= @total %>
 
-<%= link_to 'Create new', users_collection_creation_form_path, class: "px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+<%= link_to t('create_new'), users_collection_creation_form_path, class: "px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
 
 </div>
 <div class="relative shadow-md sm:rounded-lg mt-7">
-    <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 lg:w-full">
+    <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 lg:w-full p-2">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th class="px-4 py-3">
-                    ID
+                    <%= t('id') %>
                 </th>
                 <th class="px-4 py-3">
-                    Name
+                    <%= t('name') %>
+                </th>
+                <th class="hidden md:table-cell md:block px-4 py-4">
+                    <%= t('item_count') %>
                 </th>
                 <th class="px-4 py-4">
-                    No. of items
-                </th>
-                <th class="px-4 py-4">
-                    Action
+                    <%= t('action') %>
                 </th>
             </tr>
         </thead>
         <tbody>
         <% @collections.each do |collection| %>
             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td class="hidden md:table-cell md:block px-4 py-4">
+                <td class="px-4 py-4">
                     <%= collection.id %>
                 </td>
                 <td class="px-4 py-4">
                     <%= collection.name %>
                 </td>
-                <td class="px-4 py-4">
+                <td class="hidden md:table-cell md:block px-4 py-4">
                     <%= collection.items_count %>
                 </td>
                 <td class="px-4 py-4">
-                    <%= link_to 'Edit', users_view_collection_path(collection.id), class: 'px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'%>
+                    <%= link_to t('edit'), users_view_collection_path(collection.id), class: 'px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'%>
                 </td>
             </tr>
         <% end %>

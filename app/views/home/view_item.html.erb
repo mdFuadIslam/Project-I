@@ -1,45 +1,48 @@
 <div class = 'z-10 grid grid-cols-1 bg-white w-full dark:bg-gray-800 p-4 border border-black dark:border-gray-700 dark:text-white rounded-lg border border-black'>
-
+<div>
+<h1 class = "text-2xl text-gray-900 dark:text-white"><strong><%= t('item_view') %></strong></h1>
+</div>
 <div class="ml-0 mx-auto">
   <img class=" mx-auto w-20 h-20 max-w-xs max-h-xs rounded-lg" src="<%= @item.image_url.nil? ? image_path('item') : item.image_url %>" alt="">
 </div>
 <div class=" z-20 grid grid-cols-2 gap-4 ">
   <div>
     <label for="item-name" class="block text-lg font-medium text-gray-700 dark:text-white">
-      Name:
+      <%= t('name') %> :
     </label>
     <p class = 'overflow-y-auto' id="item-name"><%= @item.name %></p>
   </div>
 
   <div>
     <label for="item-id" class="block text-lg font-medium text-gray-700 dark:text-white">
-      ID:
+      <%= t('id') %> :
     </label>
     <p class = 'overflow-y-auto' id="item-id"><%= @item.id %></p>
   </div>
 
   <div>
     <label for="item-tags" class="block text-lg font-medium text-gray-700 dark:text-white">
-      Tags:
+      <%= t('tags') %> :
     </label>
     <p class = 'overflow-y-auto'><%= @item.tags %></p>
   </div>
 
   <div>
     <label for="collection-name" class="block text-lg font-medium text-gray-700 dark:text-white">
-      Collection:
+      <%= t('collections') %> :
     </label>
     <p class = 'overflow-y-auto' id="collection-name"><%= @collection_name %></p>
   </div>
 
   <div>
     <label for="owner-name" class="block text-lg font-medium text-gray-700 dark:text-white">
-      Owner:
+      <%= t('owner') %> :
     </label>
     <p class = 'overflow-y-auto' id="owner-name"><%= @owner_name %></p>
   </div>
-  
+  </div>
   <% unless @fields.nil? %>
+  <div class = 'grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm text-gray-900 dark:text-white'>
     <% @fields.each_with_index do |field,index| %>
     <div>
         <label for="field-values" class="block text-lg font-medium text-gray-700 dark:text-white">
@@ -48,8 +51,9 @@
         <p class = 'overflow-y-auto' id="field-values"><%= @field_values[index] %></p>
     </div>
     <% end %>
+  </div>
   <% end %>
-</div>
+
 
 <div class="flex justify-start gap-4 mt-7" >
   <%= form_tag home_vote_path, method: :post, html: { class: 'hover:bg-blue-700 w-1/2' } do%>
@@ -58,9 +62,9 @@
     <%= hidden_field_tag :action_name, 'like' %>
 
     <% if @liked == 1 %>
-      <%= submit_tag "Like", class: "text-blue-700 border border-blue-700 bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+      <%= submit_tag t("like"), class: "text-blue-700 border border-blue-700 bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
     <% else %>
-      <%= submit_tag "Like", class: "text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+      <%= submit_tag t("like"), class: "text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
     <% end %>
     <span id="like-counter" class="ml-2 text-sm"><%= @likes %></span>
   <% end %>
@@ -70,9 +74,9 @@
     <%= hidden_field_tag :action_name, 'dislike' %>
 
     <% if @liked == 2 %>
-      <%= submit_tag "Dislike", class: "text-blue-700 border border-blue-700 bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+      <%= submit_tag t("dislike"), class: "text-blue-700 border border-blue-700 bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
     <% else %>
-      <%= submit_tag "Dislike", class: "text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
+      <%= submit_tag t("dislike"), class: "text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" %>
     <% end %>
     <span id="like-counter" class="ml-2 text-sm"><%= @dislikes %></span>
   <% end %>

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   post 'home/search_results', to: 'home#search_results'
   post 'home/search', to: 'home#search_results'
+  get 'home/search', to: 'home#search_results'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -7,10 +7,10 @@
         <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
      </svg>
   </button>
-  <button class="flex lg:hidden items-center space-x-3 rtl:space-x-reverse" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+  <%= link_to root_path, class: "flex lg:hidden items-center space-x-3 rtl:space-x-reverse" do %>
       <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Project-I</span>
-  </button>
+  <% end %>
   <div>
   </div>
   
@@ -105,10 +105,10 @@
 
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-900 dark:bg-gray-900">
-      <div class="flex items-center ps-2.5 mb-5">
-         <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
-         <span class="self-center text-xl font-semibold whitespace-nowrap text-white dark:text-white">Project-I</span>
-      </div>
+      <%= link_to root_path, class: 'flex items-center ps-2.5 mb-5 text-white gap-2' do %>
+         <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Project-I</span>
+      <% end %>
       <% if user_signed_in? %>
       <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 dark:text-gray-400"><%= t('menu') %></h5>
       <ul class="space-y-2 font-medium">

@@ -27,4 +27,59 @@ en:
   menu: 'Menu'
   admin_panel: 'Admin Panel'
   user_panel: 'My Account'
-  
+  item_count: "No. of Items"
+  id: "ID"
+  collection_name" : "Collection Name"
+  collection_count: "No. of Collections"
+  name: "Name"
+  tags: "Tags"
+  created_at: "Created At"
+  updated_at: "Updated At"
+  action: 'Action'
+  collection_count: "No. of Collections"
+  create_new: 'Create new'
+  status: 'Status'
+  email: 'Email'
+  last_logged: 'Last Login'
+  promote: 'Promote'
+  demote: 'Demote'
+  block: 'Block'
+  update: 'Update'
+  description: 'Description'
+  category: 'Category'
+  submit: 'Submit'
+  add_field: 'Add Field'
+  field_name: 'Field Name'
+  field_type: 'Field Type'
+  value: 'Value'
+  add: 'Add'
+  delete: 'Delete'
+  update_field: 'Update Field'
+  item_creation: 'Item Creation'
+  item_view: 'Item View'
+  collection_creation: 'Collection Creation'
+  collection_edit: 'Collection Creation'
+  next: 'Next'
+  step1: 'Step 1'
+  step2: 'Step 2'
+  login: 'Log in'
+  password: 'Password'
+  confirm_password: 'Confirm Password'
+  remember_me: 'Remember Me'
+  signup: 'Sign Up'
+  username: 'Your email'
+  forgot_your_pass: 'Forgot your password?'
+  req_confirmation: "Didn't receive confirmation instructions?"
+  req_unlock: "Didn't receive unlock instructions?"
+  nationality: 'Nationality'
+  city: 'City'
+  example_mail: 'name@example.com'
+  send_reset_password_instructions: "Send me reset password instructions"
+  send_confirmation_instructions: "Resend confirmation instructions"
+  send_unlock_instructions: "Resend unlock instructions"
+  edit: 'Edit'
+  joined_at: 'Joined at'
+  collection_view: 'Collection View'
+  like: 'Like'
+  dislike: 'Dislike'
+  owner: 'Owner'
