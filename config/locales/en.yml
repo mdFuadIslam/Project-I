@@ -88,3 +88,4 @@ en:
   new_password: 'New Password'
   current_password: 'Current Password'
   back: 'Back'
+  current_password_message: 'we need your current password to confirm your changes'
