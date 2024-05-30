@@ -77,3 +77,5 @@ gem "omniauth", "~> 2.1"
 gem "faker", "~> 3.3"
 
 gem 'redcarpet'
+
+gem 'devise-i18n'
