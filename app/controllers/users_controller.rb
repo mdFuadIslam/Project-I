@@ -18,6 +18,9 @@ class UsersController < ApplicationController
 
     if params[:block]
       User.unscoped.where(id: selected_user_ids).update_all(status: "blocked")
+      if selected_user_ids.include?(current_user.id.to_s)
+        sign_out current_user
+      end
     elsif params[:delete]
       User.unscoped.where(id: selected_user_ids).destroy_all
     elsif params[:unblock]
