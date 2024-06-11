@@ -76,6 +76,6 @@ gem "omniauth", "~> 2.1"
 
 gem "faker", "~> 3.3"
 
-gem 'actionpack'
+gem 'redcarpet'
 
-gem "aws-sdk", "~> 3.2"
+gem 'devise-i18n'

@@ -27,3 +27,65 @@ bn:
   menu: 'মেনু'
   admin_panel: 'এডমিন প্যানেল'
   user_panel: 'আমার অ্যাকাউন্ট'
+  item_count: "আইটেমের সংখ্যা"
+  id: "আইডি"
+  collection_name: "সংগ্রহের নাম"
+  collection_count: "সংগ্রহের সংখ্যা"
+  name: "নাম"
+  tags: "ট্যাগ"
+  created_at: "তৈরি হয়েছে"
+  updated_at: "আপডেট হয়েছে"
+  action: 'অ্যাকশন'
+  collection_count: "সংগ্রহের সংখ্যা"
+  create_new: 'নতুন তৈরি করুন'
+  status: 'অবস্থা'
+  email: 'ইমেইল'
+  last_logged: 'সর্বশেষ লগ ইন'
+  promote: 'উভায়'
+  demote: 'উচ্ছেদ'
+  block: 'ব্লক'
+  update: 'আপডেট'
+  description: 'বিবরণ'
+  category: 'বিভাগ'
+  submit: 'সাবমিট'
+  add_field: 'ফিল্ড যোগ করুন'
+  field_name: 'ফিল্ড নাম'
+  field_type: 'ফিল্ড ধরন'
+  value: 'মান'
+  add: 'যোগ করুন'
+  delete: 'মুছে ফেলুন'
+  update_field: 'ফিল্ড আপডেট করুন'
+  item_creation: 'আইটেম তৈরি'
+  item_view: 'আইটেম দেখুন'
+  collection_creation: 'সংগ্রহ তৈরি'
+  collection_edit: 'সংগ্রহ দেখুন'
+  next: 'পরবর্তী'
+  step1: 'ধাপ ১'
+  step2: 'ধাপ ২'
+  login: 'লগইন'
+  password: 'পাসওয়ার্ড'
+  confirm_password: 'পাসওয়ার্ড নিশ্চিত করুন'
+  remember_me: 'আমাকে মনে রাখুন'
+  signup: 'সাইন আপ'
+  username: 'আপনার ইমেইল'
+  forgot_your_pass: 'পাসওয়ার্ড ভুলে গেছেন?'
+  req_confirmation: "কনফারমেশন নির্দেশাবলী পেলেন না?"
+  req_unlock: "অনলক নির্দেশাবলী পেলেন না?"
+  nationality: 'জাতীয়তা'
+  city: 'শহর'
+  example_mail: 'name@example.com'
+  send_reset_password_instructions: "আমাকে পাসওয়ার্ড পুনরুদ্ধার নির্দেশাবলী পাঠান"
+  send_confirmation_instructions: "কনফারমেশন নির্দেশাবলী আবার পাঠান"
+  send_unlock_instructions: "অনলক নির্দেশাবলী আবার পাঠান"
+  edit: 'সম্পাদন করুন'
+  joined_at: 'যুক্ত হয়েছে'
+  collection_view: 'সংগ্রহ দেখুন'
+  like: 'লাইক'
+  dislike: 'ডিস্লাইক'
+  owner: 'মালিক'
+  language: 'ভাষা'
+  theme: 'থিম'
+  new_password: 'নতুন পাসওয়ার্ড'
+  current_password: 'বর্তমান পাসওয়ার্ড'
+  back: 'ফিরে যান'
+  current_password_message: 'আমাদের আপনার বর্তমান পাসওয়ার্ড জানা প্রয়োজন আপনার পরিবর্তন নিশ্চিত করতে'

@@ -1,9 +1,4 @@
 class HomeController < ApplicationController
-  before_action:set_locale
-
-  def set_locale
-    I18n.locale = session[:lang]
-  end
   def index
     session[:lang] ||= 'en'
     set_locale
@@ -121,7 +116,69 @@ class HomeController < ApplicationController
       @items.each do |item|
         @Owners << User.find_by(id: item.owner_id).name
       end
+      @collections = []
+    elsif params[:search]
+      text = params[:search_string]
+      @items = []
+      @collections = []
+
+      temp_items = Item.where("name LIKE ?", "%#{text}%")
+      temp_items_tag = Item.where("tags LIKE ?", "%#{text}%")
+      temp_collections = Collection.where("name LIKE ?", "%#{text}%")
+      temp_collections_desc = Collection.where("description LIKE ?", "%#{text}%")
+      temp_collections_cate = Collection.where("category LIKE ?", "%#{text}%")
+      users = User.where("name LIKE ?", "%#{text}%")
+
+      @comments = Comment.where("content LIKE ?", "%#{text}%")
+
+      users.each do |user|
+        if Item.where(owner_id: user.id)
+          temp_items_owner = Item.where(owner_id: user.id)
+          temp_items_owner.each do |item|
+            @items << item
+          end
+        end
+        if Collection.where(owner_id: user.id)
+          temp_collections_owner = Collection.where(owner_id: user.id)
+          temp_collections_owner.each do |collection|
+            @collections << collection
+          end
+        end
+      end
+      temp_items.each do |item|
+        @items << item
+      end
+      temp_items_tag.each do |item|
+        @items << item
+      end
+      temp_collections.each do |collection|
+        @collections << collection
+      end
+      temp_collections_desc.each do |collection|
+        @collections << collection
+      end
+      temp_collections_cate.each do |collection|
+        @collections << collection
+      end
+
+      @comments.each do |comment|
+        if comment.type_name == "item"
+          @items << Item.find_by(id: comment.type_id)
+        elsif comment.type_name == "collection"
+          @collections << Collection.find_by(id: comment.type_id)
+        end
+      end
+
+      @Owners = []
+      @items.each do |item|
+        @Owners << User.find_by(id: item.owner_id).name
+      end
+      @Owners_collections = []
+      @collections.each do |collection|
+        @Owners_collections << User.find_by(id: collection.owner_id).name
+      end
     end
+
   end
 
   def vote

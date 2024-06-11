@@ -10,26 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_134613) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_162027) do
   create_table "collections", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "category"
     t.string "owner_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "items_count", default: 0
     t.text "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
     t.string "type_id"
     t.text "content"
     t.string "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "user_name"
     t.string "type_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "custom_field_values", force: :cascade do |t|
@@ -52,17 +52,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_134613) do
     t.string "owner_id"
     t.string "collection_id"
     t.text "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "tags", default: "all"
     t.text "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
     t.text "name"
+    t.integer "count", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "count", default: 1
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,7 +91,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_134613) do
     t.string "language", default: "en"
     t.string "nationality", default: ""
     t.string "city", default: ""
-    t.text "image_url"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -102,9 +101,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_134613) do
     t.string "type_id"
     t.string "user_id"
     t.string "action"
+    t.string "type_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type_name"
   end
 
 end

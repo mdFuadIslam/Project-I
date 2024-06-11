@@ -7,10 +7,10 @@
         <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
      </svg>
   </button>
-  <button class="flex lg:hidden items-center space-x-3 rtl:space-x-reverse" type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+  <%= link_to root_path, class: "flex lg:hidden items-center space-x-3 rtl:space-x-reverse" do %>
       <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Project-I</span>
-  </button>
+  <% end %>
   <div>
   </div>
   
@@ -43,7 +43,7 @@
             <%= link_to users_dashboard_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", method: :get do %><%= t('dashboard')%><% end %>
           </li>
           <li>
-            <%= link_to users_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", method: :get do %><%= t('settings') %><% end %>
+            <%= link_to edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white", method: :get do %><%= t('settings') %><% end %>
           </li>
           <li>
             <%= form_with url: destroy_user_session_path, method: :delete do %><button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><%= t('sign_out') %></button><% end %>
@@ -70,7 +70,7 @@
   <div class="flex flex-wrap items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
     <ul class="w-full flex flex-wrap flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
       <li class = 'w-full'>
-        <form class="max-w-md mx-auto">   
+        <%= form_tag home_search_path, method: :post, class: "max-w-md mx-auto" do %>   
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"><%= t('search') %></label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -78,10 +78,10 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= t('search_bar') %>" required />
-                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><%= t('search') %></button>
+                <input type="search" id="default-search" name ='search_string' class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="<%= t('search_bar') %>" required />
+                <button type="submit" name = 'search' class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><%= t('search') %></button>
             </div>
-        </form>
+        <% end %>
       </li>
       <li class = '<%= "w-1/4 sm:mt-6 #{current_page?(root_path) ? 'block text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500' : 'block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }" %>'>
         <%= link_to root_path, class: "", method: :get do %>
@@ -105,10 +105,10 @@
 
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-900 dark:bg-gray-900">
-      <div class="flex items-center ps-2.5 mb-5">
-         <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
-         <span class="self-center text-xl font-semibold whitespace-nowrap text-white dark:text-white">Project-I</span>
-      </div>
+      <%= link_to root_path, class: 'flex items-center ps-2.5 mb-5 text-white gap-2' do %>
+         <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Project-I</span>
+      <% end %>
       <% if user_signed_in? %>
       <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 dark:text-gray-400"><%= t('menu') %></h5>
       <ul class="space-y-2 font-medium">
@@ -152,7 +152,7 @@
          <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
          <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 dark:text-gray-400"><%= t('user_panel') %></h5>
          <li>
-            <%= link_to users_settings_path, class: "flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group", method: :get do %>
+            <%= link_to edit_user_registration_path, class: "flex items-center p-2 text-gray-900 rounded-lg text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group", method: :get do %>
                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill='currentColor' viewBox="0 0 22 22">
                  <path d="M7 7a3.994 3.994 0 0 0-3.857 3H0v2h3.143a3.979 3.979 0 0 0 7.714 0H22v-2H10.857A3.994 3.994 0 0 0 7 7zM17 0a3.994 3.994 0 0 0-3.857 3H0v2h13.143a3.979 3.979 0 0 0 7.714 0H22V3h-1.143A3.994 3.994 0 0 0 17 0zM17 14a3.994 3.994 0 0 0-3.857 3H0v2h13.143a3.979 3.979 0 0 0 7.714 0H22v-2h-1.143A3.994 3.994 0 0 0 17 14z"/>
                </svg>

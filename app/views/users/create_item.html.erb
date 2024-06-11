@@ -1,13 +1,13 @@
 <div class = 'bg-white dark:bg-gray-800 p-4 mt-8 rounded-lg w-full'>
   <%= render partial: "stepbar" %>
-  <h1 class = "text-2xl text-gray-900 dark:text-white"><strong>Item Creation</strong></h1>
+  <h1 class = "text-2xl text-gray-900 dark:text-white"><strong><%= t('item_creation') %></strong></h1>
 
   <%= form_tag users_create_item_path, method: :post, html: { class: 'max-w-md mx-auto mt-4' } do%>
     
     <% if @step == '1' %>
 
       <div class="relative z-0 w-full mb-5">
-        <label for="collection" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-2xl">Collections:</label>
+        <label for="collection" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-2xl"><%= t('collections') %>:</label>
         <select id="collection" name='collection_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option value="NA">None</option>
           <% @collections.each do |collection| %>
@@ -16,22 +16,22 @@
         </select>
     </div>
      
-      <%= submit_tag "Next", name: 'next',class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      <%= submit_tag t('next'), name: 'next',class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
     
     <% else %>
       <%= hidden_field_tag :collection_id, @collection_id %>
 
       <div class="relative z-0 w-full mb-5 group">
         <%= text_field_tag :name, nil, class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: ' ', required: true %>
-        <label for="floating_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+        <label for="floating_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"><%= t('name') %></label>
       </div>
       
       <div class="relative z-0 w-full mb-5 group">
         <%= text_field_tag :tags, nil, class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: ' ', required: true %>
-        <label for="floating_tags" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Tags</label>
+        <label for="floating_tags" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"><%= t('tags') %></label>
       </div>
 
-      <div id="fields-container">
+      <div id="fields-container" class = 'grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm text-gray-900 dark:text-white'>
         <% # get the current fields, if any %>
         <% if @fields %>
         <% @fields.each do |field| %>
@@ -39,22 +39,23 @@
               <input type="hidden" name="field_id[]" value="<%= field.id %>"/>
               <label for="field_name_<%= field.id %>" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mr-2"><%= field.field_name %>:</label>
               <% if field.field_type == "integer"%>
-                <input type="number" name="field_value[]" id="field_value_<%= field.id %>"/>
+                <input type="number" name="field_value[]" id="field_value_<%= field.id %>" class = "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
               <% elsif field.field_type == "string" %>
-                <input type="text" name="field_value[]" id="field_value_<%= field.id %>"/>
+                <input type="text" name="field_value[]" id="field_value_<%= field.id %>" class = "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
               <% elsif field.field_type == "boolean_checkboxes" %>
                   <label for="field_value_<%= field.id %>_true">
-                    <input type="radio" name="field_value[]" id="field_value_<%= field.id %>_true" value="true"/>
+                    <input type="radio" name="field_value[]" id="field_value_<%= field.id %>_true" value="true" class = 'm-2'/>
                     True
                   </label>
-                  <label for="field_value_<%= field.id %>_false">
-                    <input type="radio" name="field_value[]" id="field_value_<%= field.id %>_false" value="false"/>
+                  <span class="block w-2"></span>
+                  <label for="field_value_<%= field.id %>_false" >
+                    <input type="radio" name="field_value[]" id="field_value_<%= field.id %>_false" value="false" class = 'm-2'/>
                     False
                   </label>
               <% elsif field.field_type == "multiline_text" %>
-                <textarea name="field_value[]" id="field_value_<%= field.id %>"></textarea>
+                <textarea name="field_value[]" id="field_value_<%= field.id %>" class = "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"></textarea>
               <% elsif field.field_type == "date" %>
-                <input type="date" id="field_value_<%= field.id %>" name="field_value[]"> 
+                <input type="date" id="field_value_<%= field.id %>" name="field_value[]" class = "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"> 
               <% end %>
               
             </div>

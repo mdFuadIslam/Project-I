@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get 'users/collections_management'
   get 'users/collection_creation_form'
   get 'users/view_collection'
-  get 'users/settings'
   get 'users/admin_page', to: 'users#admin_page'
   post 'users/submited/choice', to: 'users#manage'
   get 'users/admin_user_view', to: 'users#admin_user_view'
@@ -31,6 +30,8 @@ Rails.application.routes.draw do
   post 'home/comment', to: 'home#comment'
 
   post 'home/search_results', to: 'home#search_results'
+  post 'home/search', to: 'home#search_results'
+  get 'home/search', to: 'home#search_results'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -4,7 +4,8 @@ class CreateItems < ActiveRecord::Migration[7.1]
       t.string :owner_id
       t.string :collection_id
       t.text :name
-      t.string :tag
+      t.text :tags, default: "all"
+      t.text :image_url
 
       t.timestamps
     end
