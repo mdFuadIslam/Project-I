@@ -1,0 +1,58 @@
+MAIN PROBLEMS:
+	Site should support two languages: English and any other 
+	to support different screen resolutions (including mobile phones), adaptive;
+	to use ORM to access data (sequelize, prism, typeorm, anything you like),
+
+
+3 weeks = 21 days + 2 days revision
+
+
+Tasks:
+
+Two types: Items, collections
+
+user three types: [Guest , Member, Admin]
+
+Functions:================================
+
+Search bar --access GMA
+	{show items / generate collection link. #searhes for string through comments as well.}
+
+User creation page: --access GMA 
+
+User dashboard page: [manage collection(create new, delete, edit)]
+
+Collection handler Page:[manage items(create new, delete, edit), sort & filter items] --access GMA --manage creatorMember && A
+	{creation/edit of new collection will offer the ability to add custom fields}
+	{among this fixed filed are id, name, tags}
+	{additional fields can be several of this: 3 integer fields, 3 string fields, 3 multiline text fields, 3 boolean checkboxes, 3 	date fields #name must be specified for each}
+	{Every collection contains: name, description (!!with markdown formatting support!!), topic/category (one value from the predefined list, for example, “Books”, “Signs”, 	“Silverware”), optional image (uploaded by the users into the cloud).}
+
+Admin page: [view, block, unblock, delete, add to admin, remove from admin(Including self)] --access A
+
+Item/collection page: create items/collections --access GM
+	modify items/collections [edit, add, delete] --access creatorMember && A
+	show items/collections  --access GMA --manage creatorMember && A
+		{Can have comments, likes}
+
+=======================================
+
+Main page contains:
+list of latest items (name, collection, author);
+list of the top 5 largest collections;
+tag cloud (when the user clicks on the tag you display the list of items — in general you should use “search results page” for it).
+
+Site should support two languages: English and any other 
+Site should support two visual themes (skins): light and dark
+
+It’s required:
+to use CSS-framework, e.g. Bootstrap (but you can use any CSS-framework);
+to support different screen resolutions (including mobile phones), adaptive;
+to use ORM to access data (sequelize, prism, typeorm, anything you like),
+to use full-text search engine (either external library or using native database features) — use can’t perform full database scan with SELECTs.
+
+Optional requirements (for a separate grade, only if all other requirements are implemented):
+authentication via social networks;
+add custom fields with the type “one from the given list” with ability to specify list of available options;
+add any number of custom fields of any kind (not 0 or 1 or 2 or 3 of integer fields, etc., but any number of them).
+add export collections to CSV-file.

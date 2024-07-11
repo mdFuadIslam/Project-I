@@ -79,3 +79,9 @@ gem "faker", "~> 3.3"
 gem 'redcarpet'
 
 gem 'devise-i18n'
+
+gem 'jira-ruby'
+
+gem 'httparty'
+
+gem 'dotenv-rails', groups: [:development, :test]

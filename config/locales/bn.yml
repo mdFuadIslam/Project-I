@@ -89,3 +89,7 @@ bn:
   current_password: 'বর্তমান পাসওয়ার্ড'
   back: 'ফিরে যান'
   current_password_message: 'আমাদের আপনার বর্তমান পাসওয়ার্ড জানা প্রয়োজন আপনার পরিবর্তন নিশ্চিত করতে'
+  support: 'সহায়তা'
+  ticket_creation: 'নতুন টিকেট তৈরি'
+  priority: 'প্রায়েরিটি'
+  summary: 'সারাংশ'

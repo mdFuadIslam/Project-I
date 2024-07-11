@@ -89,3 +89,7 @@ en:
   current_password: 'Current Password'
   back: 'Back'
   current_password_message: 'we need your current password to confirm your changes'
+  support: 'Create Ticket'
+  ticket_creation: 'Create a new Ticket'
+  priority: 'Priority'
+  summary: 'Summary'
