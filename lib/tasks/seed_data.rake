@@ -38,7 +38,7 @@ namespace :db do
           category: "Books",
           owner_id: user.id
         )
-        puts "Collection created: #{collection.name}"
+        collection.save!
 
         # Create 7 items for each collection
         7.times do
@@ -48,7 +48,8 @@ namespace :db do
             collection_id: collection.id,
             owner_id: user.id
           )
-          puts "Item created: #{item.name}"
+          item.save!
+
         end
       end
     end
