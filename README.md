@@ -6,6 +6,8 @@ Welcome to Project-I, a web-based platform where users can showcase their cheris
 
 [https://youtu.be/ibYQ6beGxmc]
 
+Wait 5 minutes after clicking the link.
+
 ## Live Deployment
 
 The project is deployed on Render. You can access the live site at:
