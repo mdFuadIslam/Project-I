@@ -22,6 +22,14 @@ class UsersController < ApplicationController
         sign_out current_user
       end
     elsif params[:delete]
+      Item.unscoped.where(owner_id: selected_user_ids).destroy_all
+      Comment.unscoped.where(user_id: selected_user_ids).destroy_all
+      collections = Collection.unscoped.where(owner_id: selected_user_ids)
+      fields = CustomField.unscoped.where(collection_id: collections.pluck(:id))
+      CustomFieldValue.unscoped.where(field_id: fields.pluck(:id)).destroy_all
+      fields.destroy_all
+      collections.destroy_all
+      Vote.unscoped.where(user_id: selected_user_ids).destroy_all
       User.unscoped.where(id: selected_user_ids).destroy_all
     elsif params[:unblock]
       User.unscoped.where(id: selected_user_ids).update_all(status: "member")
